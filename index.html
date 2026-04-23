@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0f0f0f" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Mi Colección" />
+  <title>Mi Colección</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div id="app">
+
+  <!-- SPLASH -->
+  <div id="splash">
+    <div class="splash-logo">▣</div>
+    <div class="splash-title">Mi Colección</div>
+  </div>
+
+  <!-- HEADER -->
+  <header id="header">
+    <div class="header-inner">
+      <div class="logo">▣ Mi Colección</div>
+      <button class="add-fab" id="btnOpenModal" aria-label="Agregar">+</button>
+    </div>
+    <!-- TYPE FILTER -->
+    <div class="type-pills">
+      <button class="pill active" data-type="all">Todo</button>
+      <button class="pill" data-type="game">🎮 Juegos</button>
+      <button class="pill" data-type="movie">🎬 Películas</button>
+    </div>
+    <!-- STATUS TABS -->
+    <div class="status-tabs">
+      <button class="stab active" data-status="all">Todos <span class="cnt" id="cnt-all">0</span></button>
+      <button class="stab" data-status="playing">Jugando <span class="cnt" id="cnt-playing">0</span></button>
+      <button class="stab" data-status="completed">Completado <span class="cnt" id="cnt-completed">0</span></button>
+      <button class="stab" data-status="wishlist">Wishlist <span class="cnt" id="cnt-wishlist">0</span></button>
+    </div>
+  </header>
+
+  <!-- GRID -->
+  <main id="main">
+    <div class="grid" id="grid"></div>
+    <div class="empty-state" id="empty">
+      <div class="empty-icon">◫</div>
+      <p>Aún no hay nada aquí</p>
+      <span>Toca <strong>+</strong> para agregar tu primer item</span>
+    </div>
+  </main>
+
+  <!-- MODAL AGREGAR -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modal">
+      <div class="modal-header">
+        <span class="modal-title">Nuevo item</span>
+        <button class="modal-close" id="btnCloseModal">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="field">
+          <label>Nombre</label>
+          <input type="text" id="inp-name" placeholder="Ej. Zelda, Dune, Oppenheimer..." autocomplete="off" />
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Tipo</label>
+            <select id="inp-type">
+              <option value="game">🎮 Videojuego</option>
+              <option value="movie">🎬 Película / Serie</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Estado</label>
+            <select id="inp-status">
+              <option value="playing">Jugando / Viendo</option>
+              <option value="completed">Completado</option>
+              <option value="wishlist">Wishlist</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label>Imagen</label>
+          <div class="img-tabs">
+            <button class="itab active" data-tab="url">URL</button>
+            <button class="itab" data-tab="file">Subir foto</button>
+          </div>
+          <div id="tab-url">
+            <input type="url" id="inp-url" placeholder="https://imagen.com/portada.jpg" autocomplete="off" />
+            <img id="url-preview" class="img-preview" style="display:none" />
+          </div>
+          <div id="tab-file" style="display:none">
+            <label class="file-drop" for="inp-file">
+              <span id="file-label">Toca para elegir una imagen</span>
+              <input type="file" id="inp-file" accept="image/*" />
+            </label>
+            <img id="file-preview" class="img-preview" style="display:none" />
+          </div>
+        </div>
+        <button class="btn-save" id="btnSave">Guardar en colección</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DETALLE -->
+  <div class="modal-overlay" id="detailOverlay">
+    <div class="modal detail-modal" id="detailModal">
+      <button class="modal-close detail-close" id="btnCloseDetail">✕</button>
+      <div id="detail-cover" class="detail-cover"></div>
+      <div class="detail-body">
+        <div class="detail-name" id="detail-name"></div>
+        <div class="detail-meta" id="detail-meta"></div>
+        <div class="detail-actions">
+          <select id="detail-status-sel" class="detail-sel"></select>
+          <button class="btn-delete" id="btnDelete">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
